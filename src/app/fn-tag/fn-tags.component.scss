@@ -1,0 +1,20 @@
+.tags-fn{
+    color: #fff;
+    display: inline-block;
+    background: #35C4FF;
+    padding: 6px 12px;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin-right: 10px;
+
+.alignCross{
+    float: right;
+    margin: 0 0 0 30px;
+    cursor:  pointer;
+}
+}
+
+.hideTags ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value{
+    display: none;
+}
+

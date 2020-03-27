@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
-export interface FnTagData{
-  id:string,
-  description:string;
+export interface FnTagData {
+  id: number | string;
+  name: string;
 }
 
 @Component({
@@ -12,33 +19,36 @@ export interface FnTagData{
   encapsulation: ViewEncapsulation.None
 })
 export class FnTagComponent implements OnInit {
-
+  @Input() tagArray: FnTagData[];
+  @Output() addCallback: EventEmitter<any> = new EventEmitter();
   @Input() showLabel: boolean;
 
-  selectedTags;
-  tagArray: any[] = [];
-  tagsArrays = [];
+  selectedTags: Array<FnTagData> = [];
 
   ngOnInit() {
-    this.tagsArrays.forEach((c, i) => {
-      this.tagArray.push({ id: i, name: c });
+    if (this.tagArray && this.tagArray.length > 0) {
+      for (const i of this.tagArray) {
+        this.tagArray.push({
+          id: i.id,
+          name: i.name,
+        });
+      }
+    }
+  }
+ 
+
+  addAction() {
+    setTimeout(() => {
+      this.addCallback.emit(this.selectedTags);
     });
   }
 
-  addTagFn(name) {
-    if (!this.showLabel) {
-      return { name, tag: true };
-    } else {
-      return { name, tag: false };
-    }
-  }
+  filterTags(fnTagData: FnTagData) { 
+    this.selectedTags = this.selectedTags.filter(el => {
+      return el.name !== fnTagData.name;
+    });
 
-  filterArrayFunction(val) {
-
-    this.selectedTags = this.selectedTags.filter((el) =>{
-    return el.name !== val;
-  });
-
+    this.addCallback.emit(this.selectedTags);
   }
 
 }

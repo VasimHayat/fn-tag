@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FnTagModule } from './fn-tag/fn-tag.module';
+import { FnTagModule } from './fn-tag/index';
 
 @NgModule({
   declarations: [

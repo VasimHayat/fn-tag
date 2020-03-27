@@ -18,32 +18,22 @@ export interface FnTagData {
   styleUrls: ['fn-tags.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class FnTagComponent implements OnInit {
-  @Input() tagArray: FnTagData[];
-  @Output() addCallback: EventEmitter<any> = new EventEmitter();
+export class FnTagComponent {
+  @Input() items: FnTagData[];
   @Input() showLabel: boolean;
+  @Output() addCallback: EventEmitter<any> = new EventEmitter(); 
 
-  selectedTags: Array<FnTagData> = [];
-
-  ngOnInit() {
-    if (this.tagArray && this.tagArray.length > 0) {
-      for (const i of this.tagArray) {
-        this.tagArray.push({
-          id: i.id,
-          name: i.name,
-        });
-      }
-    }
+  selectedTags: Array<FnTagData> = []; 
+  addTagFn(name) {
+    return { id: name, name };
   }
- 
-
   addAction() {
     setTimeout(() => {
       this.addCallback.emit(this.selectedTags);
     });
   }
 
-  filterTags(fnTagData: FnTagData) { 
+  filterTags(fnTagData: FnTagData) {
     this.selectedTags = this.selectedTags.filter(el => {
       return el.name !== fnTagData.name;
     });

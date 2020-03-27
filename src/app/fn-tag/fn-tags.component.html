@@ -1,12 +1,10 @@
 <div [ngClass]="{'hideTags': showLabel}">
-    <ng-select [items]="tagArray" [addTag]="true" bindLabel="name" [hideSelected]="true" multiple="true" (add)="addAction()" [(ngModel)]="selectedTags">
+    <ng-select [items]="items" [addTag]="addTagFn" bindLabel="name" [hideSelected]="true" multiple="true" (add)="addAction()" [(ngModel)]="selectedTags">
     </ng-select>
-</div>
-<br>
-
+</div> 
 
 <div *ngIf="showLabel && selectedTags && selectedTags.length > 0">
-    <div class="tags-fn" *ngFor="let t of selectedTags">
+    <div class="fn-tag-list" *ngFor="let t of selectedTags">
         <p class="m-0"><span class="alignCross" (click)="filterTags(t)">x</span>{{ t.name}}</p>
     </div>
 </div>

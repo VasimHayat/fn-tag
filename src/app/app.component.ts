@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fn-tag';
-
+  items = [{id:'1',name:'text'}];
   addCallback(tags){    console.log(tags)
   }
 }
